@@ -11,6 +11,10 @@ class Main:
         pygame.display.set_caption('ChessGame')      # name
         self.game = Game()
     def mainloop(self):
+
+        game = self.game
+        scr = self.screen
+
         while True:
             self.game.show_bg(self.screen)
             for event in pygame.event.get():     # to close game
