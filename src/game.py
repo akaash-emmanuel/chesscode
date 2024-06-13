@@ -12,9 +12,9 @@ class Game:
         for row in range(rows):
             for col in range(cols):
                 if (row + col) % 2 == 0:
-                    color = (0, 0, 0)     #black
+                    color = (181, 136, 99)     #black, have to change because of image colors (color taken from google reference)
                 else: 
-                    color = (255, 255, 255)       #white
+                    color = (241, 217, 180)       #white, same as above
 
                 rectangle = (col * sqsize, row * sqsize, sqsize, sqsize)
                 pygame.draw.rect(surface, color, rectangle)
