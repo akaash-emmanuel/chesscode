@@ -27,9 +27,9 @@ class Game:
                 if self.board.squares[row][col].has_piece():            #checking if we have a piece on a specific square
                     piece = self.board.squares[row][col].piece          #saving piece into variable
 
-                if piece is not self.dragger.piece:                #to render the piece except the dragging piece (remove duplicacy)
-                    piece.set_texture(size=80)
-                    img = pygame.image.load(piece.texture)              #taking texture into image
-                    img_center = col * sqsize + sqsize // 2, row * sqsize + sqsize // 2             #creating image center
-                    piece.texture_rect = img.get_rect(center = img_center)    #center image on the square
-                    surface.blit(img, piece.texture_rect)               #blit is a pregiven function to add image on square from variables
+                    if piece is not self.dragger.piece:                #to render the piece except the dragging piece (remove duplicacy)
+                        piece.set_texture(size=80)
+                        img = pygame.image.load(piece.texture)              #taking texture into image
+                        img_center = col * sqsize + sqsize // 2, row * sqsize + sqsize // 2             #creating image center
+                        piece.texture_rect = img.get_rect(center = img_center)    #center image on the square
+                        surface.blit(img, piece.texture_rect)               #blit is a pregiven function to add image on square from variables
