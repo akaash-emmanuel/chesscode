@@ -14,13 +14,35 @@ class Main:
 
         game = self.game
         scr = self.screen
+        dragger = self.game.dragger
+        board = self.game.board
 
         while True:
             game.show_bg(scr)
             game.show_pieces(scr)
 
-            for event in pygame.event.get():     # to close game
-                if event.type == pygame.QUIT:
+            for event in pygame.event.get():     
+
+                if event.type == pygame.MOUSEBUTTONDOWN:            #click event
+                    dragger.update_mouse(event.pos)                 #the position of the click in cartesian coords
+
+                    clicked_row = dragger.Y // sqsize               #row based on coords
+                    clicked_col = dragger.X // sqsize               #col based on coords
+
+                    if board.squares[clicked_row][clicked_col].has_piece():         #to check if the clicked square has a piece
+                        piece = board.squares[clicked_row][clicked_col].piece
+                        dragger.save_initial(event.pos)                         #to not drag an empty square
+                        dragger.drag_piece(piece)
+
+                elif event.type == pygame.MOUSEMOTION:              #moving the mouse
+                    if dragger.dragging:
+                        dragger.update_mouse(event.pos)
+                        dragger.update_blit(scr)
+                
+                elif event.type == pygame.MOUSEBUTTONUP:            #unclick event
+                    pass
+
+                elif event.type == pygame.QUIT:                     #quit 
                     pygame.quit()
                     sys.exit()
             
