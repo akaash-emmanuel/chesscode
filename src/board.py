@@ -191,17 +191,26 @@ class Board:
                 while True:
                     if Square.in_range(possible_move_row, possible_move_col):
                         initial = Square(row, col)
+                        final_piece = self.squares[possible_move_row][possible_move_col].piece
                         final = Square(possible_move_row, possible_move_col)
                         move = Move(initial, final)
 
                         if self.squares[possible_move_row][possible_move_col].isempty():
-                            piece.add_move(move)
+                            if bool:
+                                if not self.in_check(piece, move):
+                                    piece.add_move(move)
+                            else:
+                                piece.add_move(move)
 
-                        if self.squares[possible_move_row][possible_move_col].has_rival_piece(piece.color):
-                            piece.add_move(move)
+                        elif self.squares[possible_move_row][possible_move_col].has_rival_piece(piece.color):
+                            if bool:
+                                if not self.in_check(piece, move):
+                                    piece.add_move(move)
+                            else:
+                                piece.add_move(move)
                             break
 
-                        if self.squares[possible_move_row][possible_move_col].has_team_piece(piece.color):
+                        elif self.squares[possible_move_row][possible_move_col].has_team_piece(piece.color):
                             break        
                         
                     else: break
