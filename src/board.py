@@ -295,8 +295,10 @@ class Board:
 
         if isinstance(piece, Pawn):
             pawn_moves()
+
         elif isinstance(piece, Knight):
             knight_moves()
+            
         elif isinstance(piece, Bishop):
             straightline_moves([
                 (-1,1),

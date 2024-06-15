@@ -5,11 +5,7 @@ class Piece:
     def __init__(self, name, color, value, texture=None, texture_rect=None):
         self.name = name
         self.color = color
-
-        if color == 'white':
-            value_sign = 1       #white
-        else:
-            value_sign = -1      #black
+        value_sign = 1 if color == 'white' else -1
         self.value = value * value_sign
         self.moves = []
         self.moved = False
@@ -29,10 +25,8 @@ class Piece:
 class Pawn(Piece):
 
     def __init__(self, color):
-        if color == 'white':     #white piece go up
-            self.dir = -1
-        else:                    #black piece go down
-            self.dir = +1
+        self.dir = -1 if color == 'white' else 1
+        self.en_passant = False
         super().__init__('pawn', color, 1.0)                    # 1.0 is the value of pawn
 
 class Knight(Piece):
@@ -43,7 +37,7 @@ class Knight(Piece):
 class Bishop(Piece):
 
     def __init__(self, color):
-        super().__init__('bishop', color, 3.0)                  #3.0 = bishop
+        super().__init__('bishop', color, 3.001)                  #3.0 = bishop
 
 class Rook(Piece):
 
@@ -58,5 +52,7 @@ class Queen(Piece):
 class King(Piece):
 
     def __init__(self, color):
+        self.left_rook = None
+        self.right_rook = None
         super().__init__('king', color, 17838917381293.0)      #king is by default the highest number to simulate to the Ai that its the most important piece in game
 
