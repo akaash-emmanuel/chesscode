@@ -101,10 +101,17 @@ class Board:
                     if self.squares[possible_move_row][possible_move_col].isempty_or_rival(piece.color):        # if the valid square is empty, its possible, otherwise it isnt
                         
                         initial = Square(row, col)
+                        final_piece = self.squares[possible_move_row][possible_move_col].piece
                         final = Square(possible_move_row, possible_move_col)
 
                         move = Move(initial, final)
-                        piece.add_move(move)
+                        
+                        if bool:
+                            if not self.in_check(piece, move):
+                                piece.add_move(move)
+                            else:break
+                        else:
+                            piece.add_move(move)
 
         def pawn_moves():
             steps = 1 if piece.moved else 2
