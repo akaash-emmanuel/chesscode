@@ -11,7 +11,7 @@ class Piece:
         else:
             value_sign = -1      #black
         self.value = value * value_sign
-        self.validMoves = []
+        self.moves = []
         self.moved = False
         self.texture = texture
         self.set_texture()
@@ -20,8 +20,8 @@ class Piece:
     def set_texture(self, size = 80):                      #texture = image url, how does the piece look like for us
         self.texture = os.path.join(f'assets/images/imgs-{size}px/{self.color}_{self.name}.png')   #url to every image
 
-    def add_moves(self, move):
-        self.validMoves.append(move)
+    def add_move(self, move):
+        self.moves.append(move)
 
 class Pawn(Piece):
 

@@ -3,6 +3,7 @@ from square import Square
 from piece import *
 from move import Move
 
+
 class Board:
     def __init__(self):
         self.squares = [[0, 0, 0, 0, 0, 0, 0, 0] for col in range(cols)]
@@ -15,7 +16,7 @@ class Board:
 
         def knight_moves():
             possible_moves = [
-                (row-2, col +1),
+                (row-2, col+1),
                 (row-1, col+2),
                 (row+1, col+2),
                 (row+2, col+1),
@@ -24,13 +25,14 @@ class Board:
                 (row-1, col-2),
                 (row-2, col-1),
             ]
+            
             for possible_move in possible_moves:
                 possible_move_row, possible_move_col = possible_move
 
                 if Square.in_range(possible_move_row, possible_move_col):
-                    if self.squares[possible_move_row, possible_move_col].isempty_or_rival(piece.color):        # if the valid square is empty, its possible, otherwise it isnt
+                    if self.squares[possible_move_row][possible_move_col].isempty_or_rival(piece.color):        # if the valid square is empty, its possible, otherwise it isnt
                         
-                        initial =   Square(row, col)
+                        initial = Square(row, col)
                         final = Square(possible_move_row, possible_move_col)
 
                         move = Move(initial, final)

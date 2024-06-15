@@ -35,7 +35,8 @@ class Main:
 
                     if board.squares[clicked_row][clicked_col].has_piece():         #to check if the clicked square has a piece
                         piece = board.squares[clicked_row][clicked_col].piece
-                        board.calc_moves(piece, clicked_row, clicked_col)           
+                        board.calc_moves(piece, clicked_row, clicked_col)
+
                         dragger.save_initial(event.pos)                         #to not drag an empty square
                         dragger.drag_piece(piece)
                         game.show_bg(scr)
