@@ -43,3 +43,5 @@ class Game:
                 rect = (move.final.col * sqsize, move.final.row * sqsize, sqsize, sqsize)           #boundary of the color
                 pygame.draw.rect(surface, color, rect)          #render to the game
 
+    
+
