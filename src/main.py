@@ -12,8 +12,8 @@ class Main:
         self.screen = pygame.display.set_mode((width, height))      # a screen is created in a variable self.screen
         pygame.display.set_caption('ChessGame')      # name
         self.game = Game()
-    def mainloop(self):
 
+    def mainloop(self):
         game = self.game
         scr = self.screen
         dragger = self.game.dragger
@@ -40,18 +40,20 @@ class Main:
                     if board.squares[clicked_row][clicked_col].has_piece():         #to check if the clicked square has a piece
                         piece = board.squares[clicked_row][clicked_col].piece
                         if piece.color == game.next_player:
-                            board.calc_moves(piece, clicked_row, clicked_col, bool = True)
-
+                            board.calc_moves(piece, clicked_row, clicked_col, bool=True)
                             dragger.save_initial(event.pos)                         #to not drag an empty square
                             dragger.drag_piece(piece)
                             game.show_bg(scr)
+                            game.show_last_move(scr)
                             game.show_moves(scr)
                             game.show_pieces(scr)
 
                 elif event.type == pygame.MOUSEMOTION:              #moving the mouse
                     motion_row = event.pos[1] // sqsize
                     motion_col = event.pos[0] // sqsize
+
                     game.set_hover(motion_row, motion_col)
+                    
                     if dragger.dragging:
                         dragger.update_mouse(event.pos)
                         game.show_bg(scr)
