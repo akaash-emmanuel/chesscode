@@ -33,3 +33,13 @@ class Game:
                         img_center = col * sqsize + sqsize // 2, row * sqsize + sqsize // 2             #creating image center
                         piece.texture_rect = img.get_rect(center = img_center)    #center image on the square
                         surface.blit(img, piece.texture_rect)               #blit is a pregiven function to add image on square from variables
+ 
+    def show_moves(self, surface):                                      #to make sure the valid moves are shown onky for the dragging piece
+        if self.dragger.dragging:
+            piece = self.dragger.piece
+
+            for move in piece.moves:
+                color = '#C86464' if (move.final.row + move.final.col) % 2 == 0 else '#C84646'      #colors of the valid moves
+                rect = (move.final.col * sqsize, move.final.row * sqsize, sqsize, sqsize)           #boundary of the color
+                pygame.draw.rect(surface, color, rect)          #render to the game
+
