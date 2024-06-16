@@ -7,6 +7,7 @@ from square import Square
 from move import Move
 
 class Main:
+
     def __init__(self):      # objects being created 
         pygame.init()
         self.screen = pygame.display.set_mode((width, height))      # a screen is created in a variable self.screen
@@ -14,20 +15,21 @@ class Main:
         self.game = Game()
 
     def mainloop(self):
+
         game = self.game
-        scr = self.screen
+        screen = self.screen
         dragger = self.game.dragger
         board = self.game.board
 
         while True:
-            game.show_bg(scr)
-            game.show_last_move(scr)
-            game.show_moves(scr)
-            game.show_pieces(scr)
-            game.show_hover(scr)
+            game.show_bg(screen)
+            game.show_last_move(screen)
+            game.show_moves(screen)
+            game.show_pieces(screen)
+            game.show_hover(screen)
 
             if dragger.dragging:
-                dragger.update_blit(scr)
+                dragger.update_blit(screen)
 
             for event in pygame.event.get():     
 
@@ -39,14 +41,16 @@ class Main:
 
                     if board.squares[clicked_row][clicked_col].has_piece():         #to check if the clicked square has a piece
                         piece = board.squares[clicked_row][clicked_col].piece
+
                         if piece.color == game.next_player:
                             board.calc_moves(piece, clicked_row, clicked_col, bool=True)
                             dragger.save_initial(event.pos)                         #to not drag an empty square
                             dragger.drag_piece(piece)
-                            game.show_bg(scr)
-                            game.show_last_move(scr)
-                            game.show_moves(scr)
-                            game.show_pieces(scr)
+
+                            game.show_bg(screen)
+                            game.show_last_move(screen)
+                            game.show_moves(screen)
+                            game.show_pieces(screen)
 
                 elif event.type == pygame.MOUSEMOTION:              #moving the mouse
                     motion_row = event.pos[1] // sqsize
@@ -56,15 +60,17 @@ class Main:
                     
                     if dragger.dragging:
                         dragger.update_mouse(event.pos)
-                        game.show_bg(scr)
-                        game.show_last_move(scr)
-                        game.show_moves(scr)
-                        game.show_pieces(scr)
-                        dragger.update_blit(scr)
+                        game.show_bg(screen)
+                        game.show_last_move(screen)
+                        game.show_moves(screen)
+                        game.show_pieces(screen)
+                        dragger.update_blit(screen)
                 
-                elif event.type == pygame.MOUSEBUTTONUP:            #unclick event
+                elif event.type == pygame.MOUSEBUTTONUP:   
+                             #unclick event
                     if dragger.dragging:
                         dragger.update_mouse(event.pos)
+
                         released_row = dragger.Y // sqsize
                         released_col = dragger.X // sqsize
 
@@ -72,24 +78,35 @@ class Main:
                         final = Square(released_row, released_col)
                         move = Move(initial, final)
 
+
                         if board.valid_move(dragger.piece, move):
+
                             captured = board.squares[released_row][released_col].has_piece()
                             board.move(dragger.piece, move)
+
                             board.set_true_en_passant(dragger.piece)
+
                             game.play_sound(captured)
-                            game.show_bg(scr)
-                            game.show_last_move(scr)
-                            game.show_pieces(scr)
-                            game.next_turn()       
+
+                            game.show_bg(screen)
+                            game.show_last_move(screen)
+                            game.show_pieces(screen)
+
+                            game.next_turn()   
+
                     dragger.undrag_piece()
+
                 elif event.type == pygame.KEYDOWN:
-                    if event.jey == pygame.K_t:
+
+                    if event.key == pygame.K_t:
                         game.change_theme()
+
                     if event.key == pygame.K_r:
                         game.reset()
                         game = self.game
                         board = self.game.board
                         dragger = self.game.dragger
+                        
                 elif event.type == pygame.QUIT:                     #quit 
                     pygame.quit()
                     sys.exit()

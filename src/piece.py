@@ -54,5 +54,5 @@ class King(Piece):
     def __init__(self, color):
         self.left_rook = None
         self.right_rook = None
-        super().__init__('king', color, 17838917381293.0)      #king is by default the highest number to simulate to the Ai that its the most important piece in game
+        super().__init__('king', color, 99999.0)      #king is by default the highest number to simulate to the Ai that its the most important piece in game
 

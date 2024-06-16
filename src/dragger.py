@@ -15,8 +15,10 @@ class Dragger:
     def update_blit(self, surface):         #updating the piece visually when dragged
         self.piece.set_texture(size=128)    #make dragging piece bigger visually
         texture = self.piece.texture
+
         img = pygame.image.load(texture)   #image
         img_center = (self.X, self.Y)
+        
         self.piece.texture_rect = img.get_rect(center=img_center)  #centering the image on the square
         surface.blit(img, self.piece.texture_rect)   #rendering the image
 

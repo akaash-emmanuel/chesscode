@@ -1,6 +1,7 @@
 #this is to render the game, the board, the pieces 
 
 import pygame
+
 from constant import *
 from board import Board
 from dragger import Dragger
@@ -8,6 +9,7 @@ from config import Config
 from square import Square
 
 class Game:
+
     def __init__(self):
         self.next_player = 'white'
         self.hovered_sqr = None
@@ -32,7 +34,7 @@ class Game:
 
                 if row == 7:
                     color = theme.bg.dark if (row + col) % 2 == 0 else theme.bg.light
-                    label = self.config.font.render(Square.get_alphacols(col), 1, color)
+                    label = self.config.font.render(Square.get_alphacol(col), 1, color)
                     label_pos = (col * sqsize + sqsize - 20, height - 20)
                     surface.blit(label, label_pos)
 
@@ -51,6 +53,7 @@ class Game:
  
     def show_moves(self, surface):                                      #to make sure the valid moves are shown onky for the dragging piece
         theme = self.config.theme
+        
         if self.dragger.dragging:
             piece = self.dragger.piece
 
